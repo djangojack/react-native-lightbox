@@ -30,6 +30,7 @@ var Lightbox = createReactClass({
     backgroundColor: PropTypes.string,
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
+    onPress: PropTypes.func,
     springConfig: PropTypes.shape({
       tension: PropTypes.number,
       friction: PropTypes.number,
@@ -90,7 +91,13 @@ var Lightbox = createReactClass({
       onClose: this.onClose,
     };
   },
-
+  onPress: function() {
+    if(this.props.onPress){
+      this.props.onPress();
+    } else{
+      this.open();
+    }
+  },
   open: function() {
     this._root.measureInWindow((x, y, width, height) => {
       this.props.onOpen();
@@ -143,7 +150,7 @@ var Lightbox = createReactClass({
         <Animated.View style={{opacity: this.state.layoutOpacity}}>
           <TouchableHighlight
             underlayColor={this.props.underlayColor}
-            onPress={this.open}
+            onPress={this.onPress}
           >
             {this.props.children}
           </TouchableHighlight>
