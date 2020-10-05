@@ -88,8 +88,8 @@ var LightboxOverlay = createReactClass({
     }
   },
 
-  componentWillReceiveProps: function(props) {
-    if((this.props.isOpen != props.isOpen) && props.isOpen) {
+  componentDidUpdate: function(prevProps){
+    if(this.props.isOpen !== prevProps.isOpen && this.props.isOpen){
       this.open();
     }
   },
